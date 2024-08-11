@@ -111,10 +111,11 @@ pub struct RepositoryOptions {
         conflicts_with_all = &["password", "password_file"],
         value_parser = clap::builder::ValueParser::new(shell_words::split),
         action = clap::ArgAction::Set,
+        required = false,
     ))]
     #[cfg_attr(feature = "merge", merge(strategy = merge::vec::overwrite_empty))]
     #[serde_as(as = "OneOrMany<_>")]
-    pub password_command: Vec<String>,
+    pub password_command: std::vec::Vec<String>,
 
     /// Don't use a cache.
     #[cfg_attr(feature = "clap", clap(long, global = true, env = "RUSTIC_NO_CACHE"))]
@@ -147,11 +148,12 @@ pub struct RepositoryOptions {
             conflicts_with = "warm_up", 
             value_parser = clap::builder::ValueParser::new(shell_words::split),
             action = clap::ArgAction::Set,
+            required = false,
         )
     )]
     #[cfg_attr(feature = "merge", merge(strategy = merge::vec::overwrite_empty))]
     #[serde_as(as = "OneOrMany<_>")]
-    pub warm_up_command: Vec<String>,
+    pub warm_up_command: std::vec::Vec<String>,
 
     /// Duration (e.g. 10m) to wait after warm up
     #[cfg_attr(feature = "clap", clap(long, global = true, value_name = "DURATION"))]
